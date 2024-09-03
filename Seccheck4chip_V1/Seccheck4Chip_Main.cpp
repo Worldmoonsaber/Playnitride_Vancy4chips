@@ -181,6 +181,8 @@ int main()
 	}
 
 
+	rawimg.release();
+	cropedRImg.release();
 
 	return 0;
 }

@@ -169,6 +169,10 @@ void Uchips_Vacancycheck(thresP thresParm, ImgP imageParm, SettingP chipsetting,
 	drawF2.copyTo(image_output);
 	boolResult[0] = boolflag;
 
+
+	rawimg.release();
+	cropedRImg.release();
+
 	/*for (int i = 1; i < Fourchipspt.size() + 1; i++) //save corner coordinates
 	{
 		outputLEDX[i] = Fourchipspt[i - 1].x;

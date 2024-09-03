@@ -394,8 +394,15 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 
 
 
-
-
+	stIMG.release();
+	Rotnew.release();
+	Rotmarkpic.release();
+	Gimg.release();
+	gauGimh.release();
+	gauBGR.release();
+	finescanIMG.release();
+	adptThres.release();
+	comthresIMG.release();
 
 	std::cout << "fini" << endl;
 	return { flag, Reqcomthres, crossCenternew, marksize,Fourchipspt };
