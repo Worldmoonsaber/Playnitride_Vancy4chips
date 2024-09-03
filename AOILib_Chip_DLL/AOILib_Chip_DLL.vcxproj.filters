@@ -21,12 +21,21 @@
     <ClInclude Include="pch.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="AOILib_Chip_DLL.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="AOILib_Vancy4chips_V1.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
