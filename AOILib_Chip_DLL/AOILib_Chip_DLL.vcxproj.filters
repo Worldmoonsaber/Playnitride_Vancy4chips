@@ -27,6 +27,12 @@
     <ClInclude Include="AOILib_Vancy4chips_V1.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="..\Seccheck4chip_V1\Seccheck4chip_lib_V1.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -38,5 +44,19 @@
     <ClCompile Include="Source.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="..\Seccheck4chip_V1\GeneralOperation.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV1_.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV2.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AOILib_Chip_DLL.rc">
+      <Filter>資源檔</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

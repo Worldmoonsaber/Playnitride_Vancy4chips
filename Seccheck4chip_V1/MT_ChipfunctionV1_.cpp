@@ -1,7 +1,7 @@
 #include "Seccheck4chip_lib_V1.h"
 
 
-std::tuple<int, Mat, Point, Mat>Uchip_singlephaseDownV2_1(int flag, Mat stIMG, thresP thresParm, SettingP chipsetting, sizeTD target, Point2f creteriaPoint, Point IMGoffset, ImgP imageParm)
+std::tuple<int, Mat, Point, Mat>Uchip_singlephaseDownV2_1(int flag, Mat stIMG, thresP_ thresParm, SettingP_ chipsetting, sizeTD_ target, Point2f creteriaPoint, Point IMGoffset, ImgP_ imageParm)
 {
 	auto t_start = std::chrono::high_resolution_clock::now();
 
@@ -347,7 +347,7 @@ std::tuple<int, Mat, Point, Mat>Uchip_singlephaseDownV2_1(int flag, Mat stIMG, t
 
 
 
-std::tuple<int, Mat, Point, Mat>Uchip_dualphase(int flag, Mat stIMG, thresP thresParm, SettingP chipsetting, sizeTD target, Point2f creteriaPoint, Point IMGoffset, ImgP imageParm)
+std::tuple<int, Mat, Point, Mat>Uchip_dualphase(int flag, Mat stIMG, thresP_ thresParm, SettingP_ chipsetting, sizeTD_ target, Point2f creteriaPoint, Point IMGoffset, ImgP_ imageParm)
 {
 	auto t_start = std::chrono::high_resolution_clock::now();
 
