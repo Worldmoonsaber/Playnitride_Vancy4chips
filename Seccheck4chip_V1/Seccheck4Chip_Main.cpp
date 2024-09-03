@@ -7,10 +7,10 @@
 
 int main()
 {
-	SettingP chipsetting;
-	thresP thresParm;
-	ImgP imageParm;
-	sizeTD target;
+	SettingP_ chipsetting;
+	thresP_ thresParm;
+	ImgP_ imageParm;
+	sizeTD_ target;
 
 
 
@@ -50,40 +50,14 @@ int main()
 	int mode = 1;
 	if (mode == 1)
 	{
-		// Image source input: IMG format:RGB
-		try
-		{
-			std::tie(picorder, rawimg) = Inputfunction();
-			if (rawimg.empty())
-			{
-				boolflag = 8;
-				throw "something wrong::input image failure";
-			} //check if image is empty
-
-		} //try loop
-		catch (const char* message)
-		{
-
-			std::cout << "check catch state:: " << boolflag << endl;
-
-
-		}//catch loop
-
-		/////
-		vector<float> sizelist;
-		vector<int>threslist;
-
-		std::tie(sizelist, threslist) = dict_rectregion(picorder);
-
+		rawimg = imread("C:\\Git\\Vancy4chips\\Pic\\111005.bmp");
+		int picorder = 111005;
 	
-		target.TDmaxW = sizelist[1];
-		target.TDminW = sizelist[2];
+		target.TDmaxW = 1.5;
+		target.TDminW = 0.7;
 
-	
-		target.TDmaxH = sizelist[4];
-		target.TDminH = sizelist[5];
-
-		
+		target.TDmaxH = 1.5;
+		target.TDminH = 0.7;
 
 		if (picorder > 24052200 && picorder < 24052299)
 		{

@@ -91,7 +91,7 @@ int findBoundary(Mat creteriaIMG, Rect inirect, char direction)
 	return BoundaryVal;
 }
 
-std::tuple<Rect, Point>FindMaxInnerRect(Mat src, Mat colorSRC, sizeTD target, Point TDcenter)
+std::tuple<Rect, Point>FindMaxInnerRect(Mat src, Mat colorSRC, sizeTD_ target, Point TDcenter)
 {
 	//output:::
 	Rect innerboundary;
@@ -288,7 +288,7 @@ Mat RotatecorrectImg(double Rtheta, Mat src)
 	return patchrotaIMG;
 }
 
-std::tuple<vector<int>,vector<Rect>, vector<Point>,int>sectionalCheckFunction(Mat Reqgray, Point chipcenter, Rect chiprect, SettingP chipsetting)
+std::tuple<vector<int>,vector<Rect>, vector<Point>,int>sectionalCheckFunction(Mat Reqgray, Point chipcenter, Rect chiprect, SettingP_ chipsetting)
 {
 	vector<int> Fourchipsstate = {0,0,0,0};
 	vector<Rect> Fourchipsbdbox;
