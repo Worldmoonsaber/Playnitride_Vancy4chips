@@ -116,10 +116,13 @@ void Uchips_Vacancycheck(thresP thresParm, ImgP imageParm, SettingP chipsetting,
 
 
 		/*Resize image to speed up*/
-		chipsetting.interval[1] = chipsetting.interval[1] / 2; //490
-		chipsetting.interval[2] = chipsetting.interval[2] / 2; //273 
-		target.TDwidth = target.TDwidth / 2;
-		target.TDheight = target.TDheight / 2;
+		_chipsetting.interval[1] = _chipsetting.interval[1] / 2; //490
+		_chipsetting.interval[2] = _chipsetting.interval[2] / 2; //273 
+		_chipsetting.xpitch[0] = _chipsetting.xpitch[0] / 2; //490
+		_chipsetting.ypitch[0] = _chipsetting.ypitch[0] / 2; //273 
+
+		_target.TDwidth = _target.TDwidth / 2;
+		_target.TDheight = _target.TDheight / 2;
 		cv::resize(cropedRImg, cropedRImg, Size(int(cropedRImg.cols / 2), int(cropedRImg.rows / 2)), INTER_LINEAR);
 
 		///*///*image without CROP  process :::*/
@@ -137,20 +140,8 @@ void Uchips_Vacancycheck(thresP thresParm, ImgP imageParm, SettingP chipsetting,
 
 
 		creteriaPoint = find_piccenter(cropedRImg);
-		
-
-		//start to ISP//////////////////////////
-		if (thresParm.fgmin[imageParm.PICmode] != 99999 && thresParm.bgmax[imageParm.PICmode] != 99999 && thresParm.thresmode == 0)
-		{
 			
-			std::tie(boolflag, Gimg, crossCenter, drawF2, Fourchipspt) = Uchip_dualphaseV2(boolflag, cropedRImg, _thresParm, _chipsetting, _target, creteriaPoint, IMGoffset, _imageParm);
-
-		}
-
-		else
-		{
-			std::tie(boolflag, Gimg, crossCenter, drawF2, Fourchipspt) = Uchip_singlephaseDownV3(boolflag, cropedRImg, _thresParm, _chipsetting, _target, creteriaPoint, IMGoffset, _imageParm);
-		}
+		std::tie(boolflag, Gimg, crossCenter, drawF2, Fourchipspt) = Uchip_singlephaseDownV3(boolflag, cropedRImg, _thresParm, _chipsetting, _target, creteriaPoint, IMGoffset, _imageParm);
 
 		
 		

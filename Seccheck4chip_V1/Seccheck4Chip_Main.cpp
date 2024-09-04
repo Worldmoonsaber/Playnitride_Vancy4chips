@@ -12,8 +12,6 @@ int main()
 	ImgP_ imageParm;
 	sizeTD_ target;
 
-
-
 	imageParm.imgcols = 5320; 
 	imageParm.imgrows = 4600;
 
@@ -50,8 +48,8 @@ int main()
 	int mode = 1;
 	if (mode == 1)
 	{
-		rawimg = imread("C:\\Git\\Vancy4chips\\Pic\\111005.bmp");
-		int picorder = 111005;
+		rawimg = imread("C:\\Git\\Vancy4chips\\Pic\\24052202.bmp");
+		int picorder = 24052202;
 	
 		target.TDmaxW = 1.5;
 		target.TDminW = 0.7;
@@ -96,11 +94,13 @@ int main()
 		
 		//{mode,bgmax,bgmin,fgmax,fgmin}
 		//thresParm = { 0,{90,99999,99999},{0,99999,99999} ,{255,9,9}, {120,0,0} };//2040
-		
-		
-
-
-	
+/*
+		thresParm.thresmode = 3;
+		thresParm.fgmin[0] = 0;
+		thresParm.fgmax[0] = 35;
+		thresParm.bgmin[0] = 100;
+		thresParm.bgmax[0] = 255;
+*/	
 		
 
 		if ((chipsetting.interval[0] + 1) * chipsetting.interval[1] > rawimg.cols || (chipsetting.interval[0] + 1) * chipsetting.interval[2] > rawimg.rows)
@@ -121,6 +121,10 @@ int main()
 			/*Resize image to speed up*/
 			chipsetting.interval[1] = chipsetting.interval[1]/2; //490
 			chipsetting.interval[2] = chipsetting.interval[2]/2; //273 
+			chipsetting.xpitch[0] = chipsetting.xpitch[0] / 2; //490
+			chipsetting.ypitch[0] = chipsetting.ypitch[0] / 2; //273 
+
+
 			target.TDwidth = target.TDwidth/2;
 			target.TDheight = target.TDheight / 2;
 			cv::resize(cropedRImg, cropedRImg, Size(int(cropedRImg.cols/2), int(cropedRImg.rows / 2)), INTER_LINEAR);
@@ -135,34 +139,13 @@ int main()
 			}
 			/*rotate end----------------*/
 
-			///*///*image without CROP  process :::*/
-			//sizeParm.CsizeW = rawimg.size[0];
-			//sizeParm.CsizeH = sizeParm.CsizeW;
-			//rawimg.copyTo(cropedRImg);
-
-
 			//start to ISP-negative::
 			creteriaPoint = find_piccenter(cropedRImg); //dirt8280312
 			
 			vector<Point> Fourchipspt;
 			
-			
-			
-
-			//version2.1
-			if (thresParm.fgmin[imageParm.PICmode] != 99999 && thresParm.bgmax[imageParm.PICmode] != 99999 && thresParm.thresmode == 0)
-			{
-				std::cout << "start to dual phase detection...." << endl;
-				std::tie(boolflag, ReqIMG, crossCenter, marksize, Fourchipspt) = Uchip_dualphaseV2(boolflag, cropedRImg, thresParm, chipsetting, target, creteriaPoint, IMGoffset, imageParm);
-
-			}
-
-			else
-			{
-				std::cout << "start to single phase detection...." << endl;
-
-				std::tie(boolflag, ReqIMG, crossCenter, marksize, Fourchipspt) = Uchip_singlephaseDownV3(boolflag, cropedRImg, thresParm, chipsetting, target, creteriaPoint, IMGoffset, imageParm);
-			}
+			//version2.1	
+			std::tie(boolflag, ReqIMG, crossCenter, marksize, Fourchipspt) = Uchip_singlephaseDownV3(boolflag, cropedRImg, thresParm, chipsetting, target, creteriaPoint, IMGoffset, imageParm);
 
 			
 			cv::resize(marksize, marksize, Size(1200, 800), INTER_LINEAR);

@@ -21,9 +21,6 @@
     <ClInclude Include="pch.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="AOILib_Chip_DLL.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="AOILib_Vancy4chips_V1.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -31,6 +28,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Seccheck4chip_V1\OpenCV_Extension_Tool.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,6 +51,9 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV2.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Seccheck4chip_V1\OpenCV_Extension_Tool.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

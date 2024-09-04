@@ -89,3 +89,8 @@ std::tuple<int, Mat, Point, Mat, vector<Point>>Uchip_singlephaseDownV3(int flag,
 /******Dua - phase hcip:::********/
 //std::tuple<int, Mat, Point, Mat>Uchip_dualphase(int flag, Mat stIMG, thresP thresParm, SettingP chipsetting, sizeTD target, Point2f creteriaPoint, Point IMGoffset, ImgP imageParm);
 std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_dualphaseV2(int flag, Mat stIMG, thresP_ thresParm, SettingP_ chipsetting, sizeTD_ target, Point2f creteriaPoint, Point IMGoffset, ImgP_ imageParm);
+
+
+void funcRotatePoint(vector<Point> vPt, vector<Point>& vPtOut, Mat& marksize, float correctTheta, Point IMGoffset);
+
+void funcThreshold(Mat ImgInput, Mat& ImgThres, thresP_ thresParm, ImgP_ imageParm, sizeTD_ target);

@@ -18,6 +18,9 @@
     <ClInclude Include="Seccheck4chip_lib_V1.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCV_Extension_Tool.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seccheck4Chip_Main.cpp">
@@ -31,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="MT_ChipfunctionV2.cpp">
       <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCV_Extension_Tool.cpp">
+      <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
