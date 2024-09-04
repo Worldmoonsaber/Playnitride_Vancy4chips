@@ -47,9 +47,6 @@
     <ClCompile Include="..\Seccheck4chip_V1\GeneralOperation.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV1_.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV2.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>

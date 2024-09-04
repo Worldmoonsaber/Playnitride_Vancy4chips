@@ -158,7 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Seccheck4chip_V1\GeneralOperation.cpp" />
-    <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV1_.cpp" />
     <ClCompile Include="..\Seccheck4chip_V1\MT_ChipfunctionV2.cpp" />
     <ClCompile Include="..\Seccheck4chip_V1\OpenCV_Extension_Tool.cpp" />
     <ClCompile Include="dllmain.cpp" />

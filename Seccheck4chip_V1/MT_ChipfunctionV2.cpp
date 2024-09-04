@@ -7,12 +7,10 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 	auto t_start = std::chrono::high_resolution_clock::now();
 
 	//output parm:::::
-	Mat Reqcomthres = Mat::zeros(stIMG.rows, stIMG.cols, CV_8UC1);
 	Point crossCenter;
 	Mat marksize;
 	Mat Rotmarkpic = Mat::ones(stIMG.rows, stIMG.cols, CV_8UC3);
 	Mat Rotnew = Mat::ones(stIMG.rows, stIMG.cols, CV_8UC3);
-	Mat thresRot;
 	Point crossCenternew;
 	vector<int> Fourchipsstate;
 	vector<Rect> Fourchipsbdbox;
@@ -22,55 +20,20 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 
 
 	/////Step.1-Define Bright area::: 
-	Mat Gimg, gauGimh;
-	Mat gauBGR;
-	
-
-	vector<vector<Point>>  contH, contRot; // Vector for storing contour
-	vector<Vec4i> hierH, hierRot;
-	vector<vector<Point>> reqConH;
-
-	Mat adptThres;
-	Mat HIGHthres;
 	Mat comthresIMG;
 	int adaptWsize = 3;
 	int adaptKsize = 2;
 
-	vector<vector<Point>>  contours, REQcont; // Vector for storing contour
-	Rect retCOMP;
-	vector<Rect> Rectlist;
-	vector<Point2f> center;
-	vector<double> distance;
 	Point2f piccenter;
-	int minIndex;
-	vector<Point> approx;
-	vector< double> approxList;
-	double areacomthres;
 	stIMG.copyTo(marksize);
 
 	funcThreshold(stIMG, comthresIMG, thresParm, imageParm, target);
 
 	vector<BlobInfo> vChips = RegionPartition(comthresIMG, target.TDwidth *target.TDheight * 1.4, target.TDwidth * target.TDheight * 0.5);
 
-
-
-	Mat finescanIMG = Mat::zeros(stIMG.rows, stIMG.cols, CV_8UC1);
 	Rect drawrect;
-	Rect fineRect;
-	Point centerTD;
 
-	//cv::findContours(comthresIMG, contH, hierH,
-	//	cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE, cv::Point());
-
-	//for (size_t i = 0; i < vChips.size(); i++)
-	//{
-	//	contH.push_back(vChips[i].contour());
-	//}
-
-
-	//cv::drawContours(Reqcomthres, contH, -1, Scalar(255, 255, 255), -1);
 	piccenter = find_piccenter(comthresIMG);
-
 
 	try
 	{
@@ -84,22 +47,15 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 		else
 		{
 			vector<vector<cv::Point>> vContour;
-			vector<vector<cv::Point>> vContourFiltered;
 			vector<BlobInfo> blobRegionPossible;
 
 			for (int i = 0; i < vChips.size(); i++)
 			{
 				if (vChips[i].Width() > target.TDwidth * target.TDmaxW)
-				{
-					//vContourFiltered.push_back(blobRegion[i].Points());
 					continue;
-				}
 
 				if (vChips[i].Height() > target.TDheight * target.TDmaxH)
-				{
-					//vContourFiltered.push_back(blobRegion[i].Points());
 					continue;
-				}
 
 				if (vChips[i].Width() > target.TDwidth * target.TDminW
 					&& vChips[i].Height() > target.TDheight * target.TDminH
@@ -109,34 +65,12 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 				{
 					blobRegionPossible.push_back(vChips[i]);
 					cv::rectangle(marksize, Point(vChips[i].Xmin(), vChips[i].Ymin()), Point(vChips[i].Xmax(), vChips[i].Ymax()), Scalar(255, 255, 255), 1);
-					cv::rectangle(Reqcomthres, Point(vChips[i].Xmin(), vChips[i].Ymin()), Point(vChips[i].Xmax(), vChips[i].Ymax()), Scalar(255, 255, 255), -1);
+					cv::rectangle(comthresIMG, Point(vChips[i].Xmin(), vChips[i].Ymin()), Point(vChips[i].Xmax(), vChips[i].Ymax()), Scalar(255, 255, 255), -1);
 				}
 				else
 					vContour.push_back(vChips[i].Points());
 
 			}
-
-
-			//for (int i = 0; i < vChips.size(); i++)
-			//{
-			//	if (vChips[i].Width() > target.TDwidth * target.TDminW
-			//		&& vChips[i].Height() > target.TDheight * target.TDminH
-			//		&& vChips[i].Width() < target.TDwidth * target.TDmaxW
-			//		&& vChips[i].Height() < target.TDheight * target.TDmaxH
-			//		)
-
-			//	{
-			//		Moments M = (moments(contH[i], false));
-			//		center.push_back((Point2f((M.m10 / M.m00), (M.m01 / M.m00))));
-
-			//		cv::rectangle(marksize, retCOMP, Scalar(255, 255, 255), 4);
-			//		cv::rectangle(Reqcomthres, retCOMP, Scalar(255, 255, 255), -1);
-
-			//	}
-
-			//} //for-loop: contours
-
-
 
 			//draw pic center:: 
 			cv::circle(marksize,
@@ -173,7 +107,6 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 					drawrect = Rect(blobRegionPossible[0].Xmin(), blobRegionPossible[0].Ymin(), blobRegionPossible[0].Width(), blobRegionPossible[0].Height());
 					crossCenter = blobRegionPossible[0].Center() + Point2f(chipsetting.carx, chipsetting.cary);
 
-
 					cv::circle(marksize,
 						(Point2i(crossCenter)), //coordinate
 						6, //radius
@@ -189,12 +122,9 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 
 					int flag_test;
 					
-					std::cout << "+++++++++++fineRect : " << fineRect << endl;
 					std::cout << "+++++++++++drawrect : " << drawrect << endl;
 
-					std::tie(Fourchipsstate, Fourchipsbdbox, Fourchipspt, flag_test)=sectionalCheckFunction(Reqcomthres, Point(crossCenter), drawrect, chipsetting);
-
-					
+					std::tie(Fourchipsstate, Fourchipsbdbox, Fourchipspt, flag_test)=sectionalCheckFunction(comthresIMG, Point(crossCenter), drawrect, chipsetting);
 
 					if (flag_test == 10)
 					{
@@ -202,8 +132,7 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 						{
 							rectangle(marksize, Fourchipsbdbox[i], Scalar(130, 0, 255), 15);
 						}
-						
-						
+												
 					}
 					else
 					{
@@ -219,9 +148,7 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 						}
 					}
 
-
 					flag = flag_test;
-
 
 					if (imageParm.correctTheta != 0)
 					{
@@ -233,20 +160,7 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 
 						if (vPtOut.size() > 0)
 							crossCenternew = vPtOut[0];
-						//cv::circle(Rotnew,
-						//	(Point2i(crossCenter)), //coordinate
-						//	6, //radius
-						//	Scalar(180, 180, 180),  //color
-						//	FILLED,
-						//	LINE_AA);
-						//Rotmarkpic = RotatecorrectImg(-1 * imageParm.correctTheta, Rotnew);
-						//marksize = RotatecorrectImg(-1 * imageParm.correctTheta, marksize);
-						//cv::inRange(Rotmarkpic, Scalar(175, 175, 175), Scalar(185, 185, 185), thresRot);
-						//cv::findContours(thresRot, contRot, hierRot, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE, cv::Point());
-						//Moments Mans = (moments(contRot[0], false));
-						//crossCenternew = Point2i((Point2f((Mans.m10 / Mans.m00), (Mans.m01 / Mans.m00)))) + IMGoffset;
-						//std::cout << "check chip crossCenternew is: [ " << crossCenternew << " ]" << endl;
-						//std::cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+
 					}
 					else
 					{
@@ -287,16 +201,9 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 	std::cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
 	std::cout << "calculate color-filter time is:: " << elapsed_time_ms << endl;
 
-
-
 	stIMG.release();
 	Rotnew.release();
 	Rotmarkpic.release();
-	Gimg.release();
-	gauGimh.release();
-	gauBGR.release();
-	finescanIMG.release();
-	adptThres.release();
 
 	std::cout << "fini" << endl;
 	return { flag, comthresIMG, crossCenternew, marksize,Fourchipspt };
