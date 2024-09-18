@@ -57,6 +57,11 @@ std::tuple<int, Mat, Point, Mat, vector<Point> >Uchip_singlephaseDownV3(int flag
 				if (vChips[i].Height() > target.TDheight * target.TDmaxH)
 					continue;
 
+
+				if (vChips[i].Rectangularity() < 0.7)
+					continue;
+
+
 				if (vChips[i].Width() > target.TDwidth * target.TDminW
 					&& vChips[i].Height() > target.TDheight * target.TDminH
 					&& vChips[i].Width() < target.TDwidth * target.TDmaxW

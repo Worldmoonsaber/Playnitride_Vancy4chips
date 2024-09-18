@@ -370,7 +370,7 @@ std::tuple<vector<int>,vector<Rect>, vector<Point>,int>sectionalCheckFunction(Ma
 
 	}
 
-	if(std::accumulate(Fourchipsstate.begin(), Fourchipsstate.end(),0)==0)
+	if(std::accumulate(Fourchipsstate.begin(), Fourchipsstate.end(),0)==0) //註: 4個位置必須都是沒有晶片的
 	{
 		bolResultstate =9;
 	}
